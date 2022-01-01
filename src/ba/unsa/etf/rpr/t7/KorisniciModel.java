@@ -4,8 +4,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -150,7 +149,22 @@ public class KorisniciModel {
     }
 
     public void setTrenutniKorisnik(int i) {
+        if(this.trenutniKorisnik.getValue() != null) izmijeni(this.trenutniKorisnik.getValue());
         this.trenutniKorisnik.set(korisnici.get(i));
     }
 
+    public void zapisiDatoteku(File file) {
+        if(file == null) return;
+        PrintWriter izlaz = null;
+        try {
+            izlaz = new PrintWriter(new FileWriter(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(Korisnik korisnik : korisnici) {
+            izlaz.println(korisnik.getUsername() + ":" + korisnik.getPassword() + ":" + korisnik.getId() + ":" + korisnik.getId() + ":"
+                    + korisnik.getIme() + " " + korisnik.getPrezime() + "::");
+        }
+        izlaz.close();
+    }
 }
