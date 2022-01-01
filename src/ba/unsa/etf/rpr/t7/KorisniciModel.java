@@ -14,7 +14,7 @@ public class KorisniciModel {
     private SimpleObjectProperty<Korisnik> trenutniKorisnik = new SimpleObjectProperty<>();
 
     private Connection connection;
-    private PreparedStatement sviKorisnici;
+    private PreparedStatement sviKorisnici, izmjenaUpit;
 
     public KorisniciModel() {
         try {
@@ -31,6 +31,11 @@ public class KorisniciModel {
             } catch(SQLException ex) {
                 ex.printStackTrace();
             }
+        }
+        try {
+            izmjenaUpit = connection.prepareStatement("UPDATE korisnik SET ime=?, prezime=?, email=?, username=?, password=? WHERE id=?");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -64,9 +69,9 @@ public class KorisniciModel {
         try {
             ResultSet rs = sviKorisnici.executeQuery();
             while (rs.next()) {
-                Korisnik k = new Korisnik(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-                korisnici.add(k);
-                if (trenutniKorisnik == null) trenutniKorisnik = new SimpleObjectProperty<Korisnik>(k);
+                Korisnik korisnik = new Korisnik(rs.getInt(6), rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                korisnici.add(korisnik);
+                if (trenutniKorisnik == null) trenutniKorisnik = new SimpleObjectProperty<Korisnik>(korisnik);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,6 +81,20 @@ public class KorisniciModel {
         korisnici.add(new Korisnik("Tarik", "Sijerčić", "tsijercic1@etf.unsa.ba", "tariks", "test"));
         korisnici.add(new Korisnik("Rijad", "Fejzić", "rfejzic1@etf.unsa.ba", "rijadf", "test"));
         trenutniKorisnik.set(null);*/
+    }
+
+    public void izmijeni(Korisnik korisnik) {
+        try {
+            izmjenaUpit.setString(1, korisnik.getIme());
+            izmjenaUpit.setString(2, korisnik.getPrezime());
+            izmjenaUpit.setString(3, korisnik.getEmail());
+            izmjenaUpit.setString(4, korisnik.getUsername());
+            izmjenaUpit.setString(5, korisnik.getPassword());
+            izmjenaUpit.setInt(6, korisnik.getId());
+            izmjenaUpit.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void vratiNaDefault() {
