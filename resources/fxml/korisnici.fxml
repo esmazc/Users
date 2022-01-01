@@ -54,7 +54,7 @@
         <menus>
           <Menu text="_File">
             <items>
-              <MenuItem text="_Save" />
+              <MenuItem onAction="#saveAction" text="_Save" />
                   <MenuItem text="_Print" />
                   <Menu text="_Language">
                     <items>

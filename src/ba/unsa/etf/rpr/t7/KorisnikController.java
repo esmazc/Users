@@ -9,9 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
@@ -25,7 +26,6 @@ public class KorisnikController {
     public PasswordField fldPassword;
 
     private KorisniciModel model;
-    private AboutController aboutController;
 
     public KorisnikController(KorisniciModel model) {
         this.model = model;
@@ -149,5 +149,14 @@ public class KorisnikController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save As");
+        fileChooser.setInitialFileName("korisnici");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
+        File file = fileChooser.showSaveDialog(fldIme.getScene().getWindow());   // ili newStage()
+        model.zapisiDatoteku(file);
     }
 }
