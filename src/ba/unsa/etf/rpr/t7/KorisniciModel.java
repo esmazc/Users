@@ -4,11 +4,57 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.*;
+import java.util.Scanner;
+
 public class KorisniciModel {
     private ObservableList<Korisnik> korisnici = FXCollections.observableArrayList();
     private SimpleObjectProperty<Korisnik> trenutniKorisnik = new SimpleObjectProperty<>();
 
+    private Connection connection;
+    private PreparedStatement sviKorisnici;
+
     public KorisniciModel() {
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:korisnici.db");
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            sviKorisnici = connection.prepareStatement("SELECT * FROM korisnik");
+        } catch(SQLException e) {
+            regenerisiBazu();
+            try {
+                sviKorisnici = connection.prepareStatement("SELECT * FROM korisnik");
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void regenerisiBazu() {
+        Scanner ulaz = null;
+        try {
+            ulaz = new Scanner(new FileInputStream("korisnici.db.sql"));
+            String sqlUpit = "";
+            while(ulaz.hasNext()) {
+                sqlUpit += ulaz.nextLine();
+                if(sqlUpit.length() > 1 && sqlUpit.charAt(sqlUpit.length()-1) == ';') {
+                    try {
+                        Statement stmt = connection.createStatement();
+                        stmt.execute(sqlUpit);
+                        sqlUpit = "";
+                    } catch(SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            ulaz.close();
+        } catch(FileNotFoundException e) {
+            System.out.println("Ne postoji SQL datoteka... nastavljam sa praznom bazom");
+        }
     }
 
     public void napuni() {
