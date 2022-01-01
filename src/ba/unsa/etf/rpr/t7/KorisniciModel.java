@@ -124,6 +124,7 @@ public class KorisniciModel {
     }
 
     public void setTrenutniKorisnik(Korisnik trenutniKorisnik) {
+        if(this.trenutniKorisnik.getValue() != null) izmijeni(this.trenutniKorisnik.getValue());
         this.trenutniKorisnik.set(trenutniKorisnik);
     }
 
