@@ -61,12 +61,21 @@ public class KorisniciModel {
         // Ako je lista već bila napunjena, praznimo je
         // Na taj način se metoda napuni() može pozivati više puta u testovima
         korisnici.clear();
-
-        korisnici.add(new Korisnik("Vedran", "Ljubović", "vljubovic@etf.unsa.ba", "vedranlj", "test"));
+        try {
+            ResultSet rs = sviKorisnici.executeQuery();
+            while (rs.next()) {
+                Korisnik k = new Korisnik(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                korisnici.add(k);
+                if (trenutniKorisnik == null) trenutniKorisnik = new SimpleObjectProperty<Korisnik>(k);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        /*korisnici.add(new Korisnik("Vedran", "Ljubović", "vljubovic@etf.unsa.ba", "vedranlj", "test"));
         korisnici.add(new Korisnik("Amra", "Delić", "adelic@etf.unsa.ba", "amrad", "test"));
         korisnici.add(new Korisnik("Tarik", "Sijerčić", "tsijercic1@etf.unsa.ba", "tariks", "test"));
         korisnici.add(new Korisnik("Rijad", "Fejzić", "rfejzic1@etf.unsa.ba", "rijadf", "test"));
-        trenutniKorisnik.set(null);
+        trenutniKorisnik.set(null);*/
     }
 
     public void vratiNaDefault() {
