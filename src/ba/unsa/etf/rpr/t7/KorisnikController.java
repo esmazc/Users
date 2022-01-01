@@ -35,6 +35,7 @@ public class KorisnikController {
                 fldEmail.textProperty().unbindBidirectional(oldKorisnik.emailProperty() );
                 fldUsername.textProperty().unbindBidirectional(oldKorisnik.usernameProperty() );
                 fldPassword.textProperty().unbindBidirectional(oldKorisnik.passwordProperty() );
+                model.izmijeni(oldKorisnik);
             }
             if (newKorisnik == null) {
                 fldIme.setText("");
