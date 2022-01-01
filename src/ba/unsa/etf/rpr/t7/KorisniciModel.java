@@ -101,10 +101,21 @@ public class KorisniciModel {
         // Dodali smo metodu vratiNaDefault koja trenutno ne radi ništa, a kada prebacite Model na DAO onda
         // implementirajte ovu metodu
         // Razlog za ovo je da polazni testovi ne bi padali nakon što dodate bazu
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate("DELETE FROM korisnik");
+            regenerisiBazu();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void diskonektuj() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public ObservableList<Korisnik> getKorisnici() {
