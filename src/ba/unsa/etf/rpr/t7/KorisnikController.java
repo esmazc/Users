@@ -3,9 +3,18 @@ package ba.unsa.etf.rpr.t7;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class KorisnikController {
     public TextField fldIme;
@@ -16,6 +25,7 @@ public class KorisnikController {
     public PasswordField fldPassword;
 
     private KorisniciModel model;
+    private AboutController aboutController;
 
     public KorisnikController(KorisniciModel model) {
         this.model = model;
@@ -119,5 +129,25 @@ public class KorisnikController {
         ObservableList<Korisnik> korisnici = listKorisnici.getItems();
         korisnici.remove(model.getTrenutniKorisnik());
         listKorisnici.setItems(korisnici);
+    }
+
+    public void exitAction(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    public void aboutAction(ActionEvent actionEvent) {
+        try {
+            Stage myStage = new Stage();
+            AboutController aboutController = new AboutController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+            loader.setController(aboutController);
+            Parent root = loader.load();
+            myStage.setTitle("About");
+            myStage.setScene(new Scene(loader.getRoot(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            myStage.setResizable(false);
+            myStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
