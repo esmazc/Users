@@ -14,7 +14,7 @@ public class KorisniciModel {
     private SimpleObjectProperty<Korisnik> trenutniKorisnik = new SimpleObjectProperty<>();
 
     private Connection connection;
-    private PreparedStatement sviKorisnici, izmjenaUpit;
+    private PreparedStatement sviKorisnici, izmjenaUpit, brisanjeUpit;
 
     public KorisniciModel() {
         try {
@@ -34,6 +34,7 @@ public class KorisniciModel {
         }
         try {
             izmjenaUpit = connection.prepareStatement("UPDATE korisnik SET ime=?, prezime=?, email=?, username=?, password=? WHERE id=?");
+            brisanjeUpit = connection.prepareStatement("DELETE FROM korisnik WHERE id=?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,6 +98,15 @@ public class KorisniciModel {
         }
     }
 
+    public void obrisi(Korisnik korisnik) {
+        try {
+            brisanjeUpit.setInt(1, korisnik.getId());
+            brisanjeUpit.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void vratiNaDefault() {
         // Dodali smo metodu vratiNaDefault koja trenutno ne radi ništa, a kada prebacite Model na DAO onda
         // implementirajte ovu metodu
@@ -142,4 +152,5 @@ public class KorisniciModel {
     public void setTrenutniKorisnik(int i) {
         this.trenutniKorisnik.set(korisnici.get(i));
     }
+
 }
