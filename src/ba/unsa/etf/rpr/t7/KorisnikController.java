@@ -46,7 +46,7 @@ public class KorisnikController {
                 fldEmail.textProperty().unbindBidirectional(oldKorisnik.emailProperty() );
                 fldUsername.textProperty().unbindBidirectional(oldKorisnik.usernameProperty() );
                 fldPassword.textProperty().unbindBidirectional(oldKorisnik.passwordProperty() );
-                model.izmijeni(oldKorisnik);
+                //model.izmijeni(oldKorisnik);
             }
             if (newKorisnik == null) {
                 fldIme.setText("");
@@ -121,6 +121,8 @@ public class KorisnikController {
     }
 
     public void krajAction(ActionEvent actionEvent) {
+        for(Korisnik korisnik : listKorisnici.getItems())
+            model.izmijeni(korisnik);
         System.exit(0);
     }
 
