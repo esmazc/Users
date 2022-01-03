@@ -40,7 +40,7 @@ public class KorisniciModel {
     }
 
     private void regenerisiBazu() {
-        Scanner ulaz = null;
+        Scanner ulaz;
         try {
             ulaz = new Scanner(new FileInputStream("korisnici.db.sql"));
             String sqlUpit = "";
@@ -71,7 +71,7 @@ public class KorisniciModel {
             while (rs.next()) {
                 Korisnik korisnik = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
                 korisnici.add(korisnik);
-                if (trenutniKorisnik == null) trenutniKorisnik = new SimpleObjectProperty<Korisnik>(korisnik);
+                if (trenutniKorisnik == null) trenutniKorisnik = new SimpleObjectProperty<>(korisnik);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,16 +155,16 @@ public class KorisniciModel {
 
     public void zapisiDatoteku(File file) {
         if(file == null) return;
-        PrintWriter izlaz = null;
+        PrintWriter izlaz;
         try {
             izlaz = new PrintWriter(new FileWriter(file));
+            for(Korisnik korisnik : korisnici) {
+                izlaz.println(korisnik.getUsername() + ":" + korisnik.getPassword() + ":" + korisnik.getId() + ":" + korisnik.getId() + ":"
+                        + korisnik.getIme() + " " + korisnik.getPrezime() + "::");
+            }
+            izlaz.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(Korisnik korisnik : korisnici) {
-            izlaz.println(korisnik.getUsername() + ":" + korisnik.getPassword() + ":" + korisnik.getId() + ":" + korisnik.getId() + ":"
-                    + korisnik.getIme() + " " + korisnik.getPrezime() + "::");
-        }
-        izlaz.close();
     }
 }
