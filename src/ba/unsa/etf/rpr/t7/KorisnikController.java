@@ -9,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
@@ -140,16 +142,16 @@ public class KorisnikController {
 
     public void aboutAction(ActionEvent actionEvent) {
         try {
-            Stage myStage = new Stage();
+            Stage stage = new Stage();
             AboutController aboutController = new AboutController();
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
             loader.setController(aboutController);
             Parent root = loader.load();
-            myStage.setTitle("About");
-            myStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-            myStage.setResizable(false);
-            myStage.show();
+            stage.setTitle("About");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(false);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,5 +164,46 @@ public class KorisnikController {
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
         File file = fileChooser.showSaveDialog(fldIme.getScene().getWindow());   // ili newStage()
         model.zapisiDatoteku(file);
+    }
+
+    public void bosanskiAction(ActionEvent actionEvent) {
+        Locale.setDefault(new Locale("bs", "BA"));
+        try {
+            KorisniciModel model = new KorisniciModel();
+            model.napuni();
+            KorisnikController ctrl = new KorisnikController(model);
+
+            Stage stage = (Stage)fldIme.getScene().getWindow();
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/korisnici.fxml"), bundle);
+            loader.setController(ctrl);
+            Parent root = loader.load();
+            stage.setTitle("Korisnici");
+            stage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void englishAction(ActionEvent actionEvent) {
+        Locale.setDefault(new Locale("en", "US"));
+        try {
+            exitAction(new ActionEvent());
+            KorisniciModel model = new KorisniciModel();
+            model.napuni();
+            KorisnikController ctrl = new KorisnikController(model);
+
+            Stage stage = (Stage)fldIme.getScene().getWindow();
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/korisnici.fxml"), bundle);
+            loader.setController(ctrl);
+            Parent root = loader.load();
+            stage.setTitle("Korisnici");
+            stage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
