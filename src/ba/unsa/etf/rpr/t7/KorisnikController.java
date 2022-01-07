@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
@@ -141,11 +142,12 @@ public class KorisnikController {
         try {
             Stage myStage = new Stage();
             AboutController aboutController = new AboutController();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
             loader.setController(aboutController);
             Parent root = loader.load();
             myStage.setTitle("About");
-            myStage.setScene(new Scene(loader.getRoot(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            myStage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             myStage.setResizable(false);
             myStage.show();
         } catch (IOException e) {
