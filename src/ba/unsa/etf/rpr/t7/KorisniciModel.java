@@ -62,6 +62,27 @@ public class KorisniciModel {
         }
     }
 
+    public void vratiNaDefault() {
+        // Dodali smo metodu vratiNaDefault koja trenutno ne radi ništa, a kada prebacite Model na DAO onda
+        // implementirajte ovu metodu
+        // Razlog za ovo je da polazni testovi ne bi padali nakon što dodate bazu
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate("DELETE FROM korisnik");
+            regenerisiBazu();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void diskonektuj() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void napuni() {
         // Ako je lista već bila napunjena, praznimo je
         // Na taj način se metoda napuni() može pozivati više puta u testovima
@@ -71,8 +92,8 @@ public class KorisniciModel {
             while (rs.next()) {
                 Korisnik korisnik = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
                 korisnici.add(korisnik);
-                if (trenutniKorisnik == null) trenutniKorisnik = new SimpleObjectProperty<>(korisnik);
             }
+            trenutniKorisnik.set(null);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,27 +122,6 @@ public class KorisniciModel {
         try {
             brisanjeUpit.setInt(1, korisnik.getId());
             brisanjeUpit.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void vratiNaDefault() {
-        // Dodali smo metodu vratiNaDefault koja trenutno ne radi ništa, a kada prebacite Model na DAO onda
-        // implementirajte ovu metodu
-        // Razlog za ovo je da polazni testovi ne bi padali nakon što dodate bazu
-        try {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate("DELETE FROM korisnik");
-            regenerisiBazu();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void diskonektuj() {
-        try {
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
