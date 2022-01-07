@@ -26,21 +26,21 @@
          </rowConstraints>
          <children>
             <ListView fx:id="listKorisnici" prefHeight="100.0" prefWidth="200.0" GridPane.rowSpan="5" />
-            <Label text="Ime: " GridPane.columnIndex="1" />
+            <Label text="%ime" GridPane.columnIndex="1" />
             <TextField fx:id="fldIme" GridPane.columnIndex="2" />
-            <Label text="Prezime:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="%prezime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="fldPrezime" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label text="E-mail:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="%email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="fldEmail" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label text="Korisničko ime:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="%korisnickoIme" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="fldUsername" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Label text="Lozinka:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="%lozinka" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <PasswordField fx:id="fldPassword" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
               <buttons>
-                  <Button fx:id="btnObrisi" mnemonicParsing="false" onAction="#obrisiAction" text="Obriši" />
-                  <Button fx:id="btnDodaj" mnemonicParsing="false" onAction="#dodajAction" text="Dodaj" />
-                  <Button fx:id="btnKraj" cancelButton="true" mnemonicParsing="false" onAction="#krajAction" text="Kraj" />
+                  <Button fx:id="btnObrisi" mnemonicParsing="false" onAction="#obrisiAction" text="%obrisi" />
+                  <Button fx:id="btnDodaj" mnemonicParsing="false" onAction="#dodajAction" text="%dodaj" />
+                  <Button fx:id="btnKraj" cancelButton="true" mnemonicParsing="false" onAction="#krajAction" text="%kraj" />
               </buttons>
             </ButtonBar>
          </children>
@@ -52,22 +52,22 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu text="_File">
+          <Menu text="%file">
             <items>
-              <MenuItem onAction="#saveAction" text="_Save" />
-                  <MenuItem text="_Print" />
-                  <Menu text="_Language">
+              <MenuItem onAction="#saveAction" text="%save" />
+                  <MenuItem text="%print" />
+                  <Menu text="%language">
                     <items>
-                      <MenuItem text="_Bosanski" />
-                        <MenuItem text="_English" />
+                      <MenuItem onAction="#bosanskiAction" text="%bosanski" />
+                        <MenuItem onAction="#englishAction" text="%english" />
                     </items>
                   </Menu>
-                  <MenuItem onAction="#exitAction" text="E_xit" />
+                  <MenuItem onAction="#exitAction" text="%exit" />
             </items>
           </Menu>
-          <Menu text="_Help">
+          <Menu text="%help">
             <items>
-              <MenuItem onAction="#aboutAction" text="_About" />
+              <MenuItem onAction="#aboutAction" text="%about" />
             </items>
           </Menu>
         </menus>
