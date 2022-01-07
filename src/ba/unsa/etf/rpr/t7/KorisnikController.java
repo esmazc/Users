@@ -189,7 +189,6 @@ public class KorisnikController {
     public void englishAction(ActionEvent actionEvent) {
         Locale.setDefault(new Locale("en", "US"));
         try {
-            exitAction(new ActionEvent());
             KorisniciModel model = new KorisniciModel();
             model.napuni();
             KorisnikController ctrl = new KorisnikController(model);
