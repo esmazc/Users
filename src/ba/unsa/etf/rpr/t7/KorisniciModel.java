@@ -75,6 +75,8 @@ public class KorisniciModel {
         }
     }
 
+    public Connection getConnection() { return connection; }
+
     public void diskonektuj() {
         try {
             connection.close();
