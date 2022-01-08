@@ -122,13 +122,13 @@ public class KorisnikController {
     public void dodajAction(ActionEvent actionEvent) {
         Korisnik korisnik = new Korisnik("", "", "", "", "");
         model.getKorisnici().add(korisnik);
-        model.dodaj(korisnik);
+        //model.dodaj(korisnik);
         listKorisnici.getSelectionModel().selectLast();
     }
 
     public void krajAction(ActionEvent actionEvent) {
-        for(Korisnik korisnik : listKorisnici.getItems())
-            model.izmijeni(korisnik);
+        //for(Korisnik korisnik : listKorisnici.getItems())
+          //  model.izmijeni(korisnik);
         System.exit(0);
     }
 
@@ -151,7 +151,7 @@ public class KorisnikController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"), bundle);
             loader.setController(aboutController);
             Parent root = loader.load();
-            stage.setTitle("About");
+            stage.setTitle(bundle.getString("aboutApp"));
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.setResizable(false);
             stage.show();
@@ -174,6 +174,24 @@ public class KorisnikController {
             new Izvjestaj().showReport(model.getConnection());
         } catch (JRException e1) {
             e1.printStackTrace();
+        }
+    }
+
+    public void slikaAction(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            PretragaSlikeController pretragaSlikeController = new PretragaSlikeController();
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pretragaSlike.fxml"), bundle);
+            loader.setController(pretragaSlikeController);
+            Parent root = loader.load();
+            stage.setTitle(bundle.getString("slika"));
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setMinHeight(500);
+            stage.setMinWidth(600);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
