@@ -4,3 +4,7 @@
 .poljeNijeIspravno {
    -fx-control-inner-background: lightpink;
 }
+#imgKorisnik {
+    -fx-background-image: url("/img/face-smile.png");
+    -fx-background-size: 128px 128px;
+}
