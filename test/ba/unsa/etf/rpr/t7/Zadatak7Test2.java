@@ -1,4 +1,4 @@
-/*package ba.unsa.etf.rpr.t7;
+package ba.unsa.etf.rpr.t7;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +35,8 @@ public class Zadatak7Test2 {
         model.napuni();
         KorisnikController ctrl = new KorisnikController(model);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/korisnici.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/korisnici.fxml"), bundle);
         loader.setController(ctrl);
         Parent root = loader.load();
         stage.setTitle("Korisnici");
@@ -54,4 +56,4 @@ public class Zadatak7Test2 {
         robot.lookup("Cancel").tryQuery().isPresent();
         robot.clickOn("Cancel");
     }
-}*/
+}

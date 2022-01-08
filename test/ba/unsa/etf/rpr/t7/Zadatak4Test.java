@@ -1,4 +1,4 @@
-/*package ba.unsa.etf.rpr.t7;
+package ba.unsa.etf.rpr.t7;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -57,4 +57,3 @@ public class Zadatak4Test {
         model.zapisiDatoteku(null);
     }
 }
-*/
