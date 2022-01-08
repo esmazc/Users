@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.File;
 import java.io.IOException;
@@ -166,6 +167,14 @@ public class KorisnikController {
         model.zapisiDatoteku(file);
     }
 
+    public void printAction(ActionEvent actionEvent) {
+        try {
+            new Izvjestaj().showReport(model.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
     public void bosanskiAction(ActionEvent actionEvent) {
         Locale.setDefault(new Locale("bs", "BA"));
         try {
@@ -198,7 +207,7 @@ public class KorisnikController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/korisnici.fxml"), bundle);
             loader.setController(ctrl);
             Parent root = loader.load();
-            stage.setTitle("Korisnici");
+            stage.setTitle("Users");
             stage.setScene(new Scene(root, Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE));
             stage.show();
         } catch (IOException e) {
