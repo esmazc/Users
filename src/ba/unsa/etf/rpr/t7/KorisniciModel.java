@@ -32,9 +32,9 @@ public class KorisniciModel {
             }
         }
         try {
-            izmjenaKorisnikaUpit = connection.prepareStatement("UPDATE korisnik SET ime=?, prezime=?, email=?, username=?, password=? WHERE id=?");
+            izmjenaKorisnikaUpit = connection.prepareStatement("UPDATE korisnik SET ime=?, prezime=?, email=?, username=?, password=?, slika=? WHERE id=?");
             brisanjeKorisnikaUpit = connection.prepareStatement("DELETE FROM korisnik WHERE id=?");
-            dodajKorisnikaUpit = connection.prepareStatement("INSERT INTO korisnik VALUES(?,?,?,?,?,?)");
+            dodajKorisnikaUpit = connection.prepareStatement("INSERT INTO korisnik VALUES(?,?,?,?,?,?,?)");
             dajIdNovogKorisnikaUpit = connection.prepareStatement("SELECT Max(id)+1 FROM korisnik");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,7 +94,7 @@ public class KorisniciModel {
         try {
             ResultSet rs = sviKorisnici.executeQuery();
             while (rs.next()) {
-                Korisnik korisnik = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                Korisnik korisnik = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
                 korisnici.add(korisnik);
             }
             trenutniKorisnik.set(null);
@@ -115,8 +115,9 @@ public class KorisniciModel {
             izmjenaKorisnikaUpit.setString(3, korisnik.getEmail());
             izmjenaKorisnikaUpit.setString(4, korisnik.getUsername());
             izmjenaKorisnikaUpit.setString(5, korisnik.getPassword());
-            izmjenaKorisnikaUpit.setInt(6, korisnik.getId());
-            izmjenaKorisnikaUpit.execute();
+            izmjenaKorisnikaUpit.setString(6, korisnik.getSlika());
+            izmjenaKorisnikaUpit.setInt(7, korisnik.getId());
+            izmjenaKorisnikaUpit.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -143,6 +144,7 @@ public class KorisniciModel {
             dodajKorisnikaUpit.setString(4, korisnik.getEmail());
             dodajKorisnikaUpit.setString(5, korisnik.getUsername());
             dodajKorisnikaUpit.setString(6, korisnik.getPassword());
+            dodajKorisnikaUpit.setString(7, korisnik.getSlika());
             dodajKorisnikaUpit.executeUpdate();
             korisnik.setId(id);
         } catch (SQLException e) {
@@ -167,12 +169,20 @@ public class KorisniciModel {
     }
 
     public void setTrenutniKorisnik(Korisnik trenutniKorisnik) {
-        if(this.trenutniKorisnik.getValue() != null) izmijeni(this.trenutniKorisnik.getValue());
+        //if(this.trenutniKorisnik.getValue() != null) izmijeni(this.trenutniKorisnik.getValue());
+        if(this.trenutniKorisnik.getValue() != null){
+            if(this.trenutniKorisnik.getValue().getId() == null) dodaj(this.trenutniKorisnik.getValue());
+            else izmijeni(this.trenutniKorisnik.getValue());
+        }
         this.trenutniKorisnik.set(trenutniKorisnik);
     }
 
     public void setTrenutniKorisnik(int i) {
-        if(this.trenutniKorisnik.getValue() != null) izmijeni(this.trenutniKorisnik.getValue());
+        //if(this.trenutniKorisnik.getValue() != null) izmijeni(this.trenutniKorisnik.getValue());
+        if(this.trenutniKorisnik.getValue() != null){
+            if(this.trenutniKorisnik.getValue().getId() == null) dodaj(this.trenutniKorisnik.getValue());
+            else izmijeni(this.trenutniKorisnik.getValue());
+        }
         this.trenutniKorisnik.set(korisnici.get(i));
     }
 
