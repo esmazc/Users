@@ -55,7 +55,7 @@
           <Menu text="%file">
             <items>
               <MenuItem onAction="#saveAction" text="%save" />
-                  <MenuItem text="%print" />
+                  <MenuItem onAction="#printAction" text="%print" />
                   <Menu text="%language">
                     <items>
                       <MenuItem onAction="#bosanskiAction" text="%bosanski" />
