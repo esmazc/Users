@@ -80,12 +80,12 @@ public class PretragaSlikeController {
                     button.setOnMouseClicked(me -> {
                         slikaUrl = imageView.getImage().getUrl();
                     });
-                }*/
+                }
+            } catch(IOException e) {
+                e.printStackTrace();*/
             } catch (GiphyException e) {
                 e.printStackTrace();
-            } /*catch(IOException e) {
-                e.printStackTrace();
-            }*/
+            }
         }).start();
     }
 
