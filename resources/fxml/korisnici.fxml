@@ -60,8 +60,8 @@
                   <MenuItem onAction="#printAction" text="%print" />
                   <Menu text="%language">
                     <items>
-                      <MenuItem onAction="#bosanskiAction" text="%bosanski" />
-                        <MenuItem onAction="#englishAction" text="%english" />
+                      <MenuItem onAction="#bosanskiAction" text="_Bosanski" />
+                        <MenuItem onAction="#englishAction" text="_English" />
                     </items>
                   </Menu>
                   <MenuItem onAction="#exitAction" text="%exit" />
