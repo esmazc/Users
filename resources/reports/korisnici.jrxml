@@ -5,11 +5,11 @@
 	<property name="ireport.y" value="687"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter1.xml"/>
-	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
-	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false"/>
-	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
-	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
-	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfEncoding="Cp1250"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfEncoding="Cp1250"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfEncoding="Cp1250"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfEncoding="Cp1250"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman" pdfEncoding="Cp1250">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 			<style mode="Opaque" backcolor="#F0EFEF"/>
@@ -86,7 +86,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7d328303-8ad6-4d17-8eb3-d847d76ab4ab"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="16" isBold="false"/>
+						<font fontName="Arial" size="16" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<text><![CDATA[ime]]></text>
 				</staticText>
@@ -96,7 +96,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="16" isBold="false"/>
+						<font fontName="Arial" size="16" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<text><![CDATA[prezime]]></text>
 				</staticText>
@@ -106,7 +106,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="16" isBold="false"/>
+						<font fontName="Arial" size="16" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<text><![CDATA[username]]></text>
 				</staticText>
@@ -116,7 +116,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="16" isBold="false"/>
+						<font fontName="Arial" size="16" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<text><![CDATA[password]]></text>
 				</staticText>
@@ -133,7 +133,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="14" isBold="false"/>
+						<font fontName="Arial" size="14" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{ime}]]></textFieldExpression>
 				</textField>
@@ -143,7 +143,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="14" isBold="false"/>
+						<font fontName="Arial" size="14" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{prezime}]]></textFieldExpression>
 				</textField>
@@ -153,7 +153,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="14" isBold="false"/>
+						<font fontName="Arial" size="14" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
 				</textField>
@@ -163,7 +163,7 @@ FROM korisnik]]>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<textElement>
-						<font fontName="Arial" size="14" isBold="false"/>
+						<font fontName="Arial" size="14" isBold="false" pdfEncoding="Cp1250"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
 				</textField>
