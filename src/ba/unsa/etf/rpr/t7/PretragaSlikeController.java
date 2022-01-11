@@ -91,7 +91,13 @@ public class PretragaSlikeController {
             alert.showAndWait();
         }
         else {
-
+            if(korisnikController.listKorisnici.getSelectionModel().getSelectedItem() != null) {
+                korisnikController.listKorisnici.getSelectionModel().getSelectedItem().setSlika(slikaUrl);
+                ImageView imageView = new ImageView(korisnikController.listKorisnici.getSelectionModel().getSelectedItem().getSlika());
+                imageView.setFitWidth(128);
+                imageView.setFitHeight(128);
+                korisnikController.imgKorisnik.setGraphic(imageView);
+            }
             ((Stage)fldPretraga.getScene().getWindow()).close();
         }
     }
