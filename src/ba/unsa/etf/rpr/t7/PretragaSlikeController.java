@@ -56,6 +56,7 @@ public class PretragaSlikeController {
                         slikaUrl = imageView.getImage().getUrl();
                     });
                 }
+                //Drugi nacin, bez biblioteke za Giphy API
                 /*URL url = new URL("https://api.giphy.com/v1/gifs/search?api_key=228D8OGOH1PFC685HuBJWnmYartPPvsa&q=" + fldPretraga.getText() + "&limit=25");
                 BufferedReader ulaz = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
                 String json = "", line = null;
