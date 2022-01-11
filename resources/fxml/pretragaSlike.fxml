@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="5.0" prefWidth="602.0" vgap="5.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="5.0" vgap="5.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox spacing="5.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
          <children>
@@ -13,9 +13,9 @@
             <Button mnemonicParsing="false" onAction="#okAction" text="%ok" />
             <Button mnemonicParsing="false" onAction="#cancelAction" text="%canc" />
          </children></HBox>
-      <ScrollPane hbarPolicy="NEVER" prefHeight="500.0" prefWidth="600.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="500.0" prefWidth="600.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <content>
-          <TilePane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" />
+          <TilePane fx:id="tilePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
         </content>
       </ScrollPane>
    </children>
