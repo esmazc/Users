@@ -27,6 +27,13 @@ public class PretragaSlikeController {
     private String slikaUrl = null;
     private KorisnikController korisnikController;
 
+    @FXML
+    public void initialize() {
+        scrollPane.widthProperty().addListener(((obs, oldWidth, newWidth) -> {
+            tilePane.setPrefWidth((Double)newWidth);
+        }));
+    }
+
     public void searchAction(ActionEvent actionEvent) {
         tilePane.getChildren().clear();
         new Thread(() -> {
