@@ -28,6 +28,57 @@ public class PretragaSlikeController {
     private KorisnikController korisnikController;
 
     public void searchAction(ActionEvent actionEvent) {
+        tilePane.getChildren().clear();
+        new Thread(() -> {
+            try {
+                Giphy giphy = new Giphy("228D8OGOH1PFC685HuBJWnmYartPPvsa");
+                SearchFeed feed = giphy.search(fldPretraga.getText(), 25, 0);
+                for (int i = 0; i < 25; i++) {
+                    ImageView imageView = new ImageView("/img/loading.gif");
+                    imageView.setFitHeight(128);
+                    imageView.setFitWidth(128);
+                    Button button = new Button();
+                    button.setGraphic(imageView);
+                    Platform.runLater(() -> {
+                        tilePane.getChildren().add(button);
+                        scrollPane.setContent(tilePane);
+                    });
+                    String url = feed.getDataList().get(i).getImages().getOriginalStill().getUrl();
+                    imageView.setImage(new Image("https://i" + url.substring(14, url.indexOf("?"))));
+                    button.setOnMouseClicked(me -> {
+                        slikaUrl = imageView.getImage().getUrl();
+                    });
+                }
+                /*URL url = new URL("https://api.giphy.com/v1/gifs/search?api_key=228D8OGOH1PFC685HuBJWnmYartPPvsa&q=" + fldPretraga.getText() + "&limit=25");
+                BufferedReader ulaz = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+                String json = "", line = null;
+                while ((line = ulaz.readLine()) != null)
+                    json = json + line;
+                JSONObject jsonObject = new JSONObject(json);
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                for(int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject gif = jsonArray.getJSONObject(i); //25
+                    ImageView imageView = new ImageView("/img/loading.gif");
+                    imageView.setFitHeight(128);
+                    imageView.setFitWidth(128);
+                    Button button = new Button();
+                    button.setGraphic(imageView);
+                    Platform.runLater(() -> {
+                        tilePane.getChildren().add(button);
+                        scrollPane.setContent(tilePane);
+                    });
+                    JSONObject image = new JSONObject(gif.getJSONObject("images").get("original_still").toString());
+                    imageView.setImage(new Image("https://i" + image.get("url").toString().substring(14, image.get("url").toString().indexOf("?"))));
+                    button.setOnMouseClicked(me -> {
+                        slikaUrl = imageView.getImage().getUrl();
+                    });
+                }*/
+            } catch (GiphyException e) {
+                e.printStackTrace();
+            } /*catch(IOException e) {
+                e.printStackTrace();
+            }*/
+        }).start();
     }
 
     public void okAction(ActionEvent actionEvent) {
