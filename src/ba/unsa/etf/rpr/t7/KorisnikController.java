@@ -6,9 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +30,7 @@ public class KorisnikController {
     public TextField fldUsername;
     public ListView<Korisnik> listKorisnici;
     public PasswordField fldPassword;
+    public Button imgKorisnik;
 
     private KorisniciModel model;
 
@@ -42,7 +45,6 @@ public class KorisnikController {
             model.setTrenutniKorisnik(newKorisnik);
             listKorisnici.refresh();
          });
-
         model.trenutniKorisnikProperty().addListener((obs, oldKorisnik, newKorisnik) -> {
             if (oldKorisnik != null) {
                 fldIme.textProperty().unbindBidirectional(oldKorisnik.imeProperty() );
@@ -66,6 +68,10 @@ public class KorisnikController {
                 fldUsername.textProperty().bindBidirectional( newKorisnik.usernameProperty() );
                 fldPassword.textProperty().bindBidirectional( newKorisnik.passwordProperty() );
             }
+            ImageView imageView = new ImageView(model.getTrenutniKorisnik().getSlika());
+            imageView.setFitWidth(128);
+            imageView.setFitHeight(128);
+            imgKorisnik.setGraphic(imageView);
         });
 
         fldIme.textProperty().addListener((obs, oldIme, newIme) -> {
@@ -181,6 +187,7 @@ public class KorisnikController {
         try {
             Stage stage = new Stage();
             PretragaSlikeController pretragaSlikeController = new PretragaSlikeController();
+            pretragaSlikeController.setKorisnikController(this);
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pretragaSlike.fxml"), bundle);
             loader.setController(pretragaSlikeController);
@@ -188,7 +195,7 @@ public class KorisnikController {
             stage.setTitle(bundle.getString("slika"));
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.setMinHeight(500);
-            stage.setMinWidth(600);
+            stage.setMinWidth(625);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -198,8 +205,6 @@ public class KorisnikController {
     public void bosanskiAction(ActionEvent actionEvent) {
         Locale.setDefault(new Locale("bs", "BA"));
         try {
-            KorisniciModel model = new KorisniciModel();
-            model.napuni();
             KorisnikController ctrl = new KorisnikController(model);
 
             Stage stage = (Stage)fldIme.getScene().getWindow();
@@ -218,8 +223,6 @@ public class KorisnikController {
     public void englishAction(ActionEvent actionEvent) {
         Locale.setDefault(new Locale("en", "US"));
         try {
-            KorisniciModel model = new KorisniciModel();
-            model.napuni();
             KorisnikController ctrl = new KorisnikController(model);
 
             Stage stage = (Stage)fldIme.getScene().getWindow();
