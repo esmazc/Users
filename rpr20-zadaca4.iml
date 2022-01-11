@@ -35,5 +35,8 @@
     <orderEntry type="library" name="javafx" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
     <orderEntry type="library" name="net.sf.jasperreports" level="project" />
+    <orderEntry type="library" name="json" level="project" />
+    <orderEntry type="library" name="json1" level="project" />
+    <orderEntry type="library" name="at.mukprojects.giphy4j" level="project" />
   </component>
 </module>
