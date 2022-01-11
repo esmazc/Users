@@ -135,6 +135,7 @@ public class KorisnikController {
     public void krajAction(ActionEvent actionEvent) {
         //for(Korisnik korisnik : listKorisnici.getItems())
           //  model.izmijeni(korisnik);
+        model.izmijeni(listKorisnici.getSelectionModel().getSelectedItem());  //model.getTrenutniKorisnik();
         System.exit(0);
     }
 
